@@ -1,10 +1,25 @@
 package com.example.domain.Investment;
 
-public class PosFixedIncome extends AbstractFixedIncome{
+public class PosFixedIncome extends AbstractFixedIncomeInvestment{
 
-	protected PosFixedIncome(float rateOfInterest) {
-		super(rateOfInterest);
-		// TODO Auto-generated constructor stub
+	@Override
+	public double getRateOfInterest() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
+
+	@Override
+	public double getCurrentValue() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public double getProfabilityValue() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 
 }

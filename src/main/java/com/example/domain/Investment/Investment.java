@@ -1,9 +1,13 @@
 package com.example.domain.Investment;
+import java.time.LocalDate;
+import java.time.Period;
 
 public interface Investment {
 
-	
-	public int calcDaysInvestment();
-	public Float calcProfitabilityInvestment(float initialAmount, float currentAmount);	
-
+	public LocalDate getPurchaseDate();
+	public double getInitialValue();
+	public double getCurrentValue();
+	public Period getHoldPeriod();
+	public String getProductName();
+	public double getProfabilityValue();
 }

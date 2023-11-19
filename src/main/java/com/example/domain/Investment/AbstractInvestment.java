@@ -1,17 +1,19 @@
 package com.example.domain.Investment;
+import java.time.LocalDate;
+import java.time.Period;
 
 public abstract class AbstractInvestment implements Investment{
 		
-	private int registerDate;
-	private int initialDate;
+	protected int registerDate;
+
+	protected LocalDate purchaseDate;
+	protected double initialValue;
+	protected String productName;
 	
-	private int today; //class period
-	private float initialAmount;
-	private float currentAmount;
+	protected LocalDate saleDate;
 		
-	private String description;
-	private String financeManager;
-	private float administrateTax;
+	//private String financeManager; Create a new Class
+	//private float administrateTax; Attribute of the new Class FinanceManager
 		
 	public int getRegisterDate() {
 		return registerDate;
@@ -19,58 +21,25 @@ public abstract class AbstractInvestment implements Investment{
 	public void setRegisterDate(int registerDate) {
 		this.registerDate = registerDate;
 	}
-	public int getInitialDate() {
-		return initialDate;
+	
+	public LocalDate getPurchaseDate() {
+		return purchaseDate;
 	}
-	public void setInitialDate(int initialDate) {
-		this.initialDate = initialDate;
+	public double getInitialValue() {
+		return initialValue;
 	}
-	public float getInitialAmount() {
-		return initialAmount;
+	public Period getHoldPeriod() {
+		return null;//Period LocalDate and Local Time and purchaseDate
 	}
-	public void setInitialAmount(float initialAmount) {
-		this.initialAmount = initialAmount;
-	}
-	public float getCurrentAmount() {
-		return currentAmount;
-	}
-	public void setCurrentAmount(float currentAmount) {
-		this.currentAmount = currentAmount;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public String getFinanceManager() {
-		return financeManager;
-	}
-	public void setFinanceManager(String financeManager) {
-		this.financeManager = financeManager;
-	}
-	public int getToday() {
-		return today;
-	}
-	public void setToday(int today) {
-		this.today = today;
-	}
-	public float getAdministrateTax() {
-		return administrateTax;
-	}
-	public void setAdministrateTax(float administrateTax) {
-		this.administrateTax = administrateTax;
+	public LocalDate getSaleDate() {
+		return saleDate;
 	}
 	
-	@Override
-	public int calcDaysInvestment() {
-		return 0;
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
 	};
 	
-	@Override
-	public Float calcProfitabilityInvestment(float initialAmount, float currentAmount){
-		return this.currentAmount - this.initialAmount;
-	};
-	
-
 }
