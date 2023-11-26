@@ -6,6 +6,8 @@ public abstract class AbstractFixedIncomeInvestment extends AbstractInvestment i
 
 	protected LocalDate endDate;
 	protected double rateOfInterest;
+	protected String nameRateOfInterest;
+	protected String rateOfInterestPeriod;
 	
 	public LocalDate getEndDate() {
 		return endDate;

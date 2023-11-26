@@ -2,23 +2,22 @@ package com.example.domain.Investment;
 import java.time.LocalDate;
 import java.time.Period;
 
+import com.example.domain.FinanceManager;
+
 public abstract class AbstractInvestment implements Investment{
 		
-	protected int registerDate;
-
+	protected LocalDate registerDate;
 	protected LocalDate purchaseDate;
 	protected double initialValue;
 	protected String productName;
-	
 	protected LocalDate saleDate;
 		
-	//private String financeManager; Create a new Class
-	//private float administrateTax; Attribute of the new Class FinanceManager
+	protected FinanceManager financeManager;
 		
-	public int getRegisterDate() {
+	public LocalDate getRegisterDate() {
 		return registerDate;
 	}
-	public void setRegisterDate(int registerDate) {
+	public void setRegisterDate(LocalDate registerDate) {
 		this.registerDate = registerDate;
 	}
 	
