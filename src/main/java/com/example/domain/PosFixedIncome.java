@@ -41,13 +41,14 @@ public class PosFixedIncome extends AbstractFixedIncomeInvestment{
 	@Override
 	public double getRateOfInterest() {
 		// TODO Auto-generated method stub
-		return 0;
+		ExternalResourcesEmulater externalResourcesEmulater = ExternalResourcesEmulater.getInstance();
+		return externalResourcesEmulater.getRateOfInterest(month);
 	}
 
 	@Override
 	public double getCurrentValue() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 0; //calculate with juros compostos, Map
 	}
 
 	@Override

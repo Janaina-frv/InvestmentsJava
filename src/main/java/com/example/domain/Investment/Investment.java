@@ -6,7 +6,7 @@ public interface Investment {
 
 	public LocalDate getPurchaseDate();
 	public double getInitialValue();
-	public double getCurrentValue();
+	public double getCurrentValue(); //juros compostos - Map
 	public Period getHoldPeriod();
 	public String getProductName();
 	public double getProfabilityValue();

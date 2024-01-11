@@ -1,6 +1,7 @@
 package com.example.domain;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 import com.example.domain.Investment.AbstractInvestment;
 
@@ -9,11 +10,11 @@ public class Stock extends AbstractInvestment{
 	public Stock( 
 			FinanceManager financeManager,
 			String productName, 
-			LocalDate registerDate, 
 			double initialValue
 			) {
 		this.productName = productName;
-		this.registerDate = registerDate;
+		this.registerDate = LocalDate.now();
+		this.purchaseDate =  LocalDate.of(2023, Month.JANUARY, 1);
 		this.initialValue = initialValue;
 		this.financeManager = financeManager;
 	};
@@ -25,6 +26,7 @@ public class Stock extends AbstractInvestment{
 				+ "\n   productName = " + productName 
 				+ ", \n   initialValue = " + initialValue 
 				+ "\n   registerDate = " + registerDate + ", saleDate = " + saleDate+", "
+				+ "\n   Hold Period: " + Stock.super.getHoldPeriod()
 				+ "]";
 	}
 	

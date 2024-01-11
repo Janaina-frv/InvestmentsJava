@@ -3,9 +3,7 @@ package com.example.domain.Investment;
 public abstract class AbstractPreFixedIncomeInvestment extends AbstractFixedIncomeInvestment{
 
 	private float finalAmount;
-	
-	
-	
+		
 	public float getFinalAmount( ) {
 		return finalAmount; // ver calculo
 	}

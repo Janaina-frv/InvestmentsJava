@@ -1,6 +1,7 @@
 package com.example.domain;
 
 import java.time.LocalDate;
+import java.time.Month;
 
 import com.example.domain.Investment.AbstractPreFixedIncomeInvestment;
 
@@ -9,13 +10,13 @@ public class PreFixedIncome extends AbstractPreFixedIncomeInvestment{
 	public PreFixedIncome( 
 			FinanceManager financeManager,
 			String productName, 
-			LocalDate registerDate, 
 			double initialValue,
 			double rateOfInterest,
 			String rateOfInterestPeriod
 			) {
 		this.productName = productName;
-		this.registerDate = registerDate;
+		this.registerDate = LocalDate.now();
+		this.purchaseDate = LocalDate.of(2023, Month.JUNE, 1);
 		this.initialValue = initialValue;
 		this.rateOfInterest = rateOfInterest;
 		this.rateOfInterestPeriod = rateOfInterestPeriod;
@@ -31,7 +32,7 @@ public class PreFixedIncome extends AbstractPreFixedIncomeInvestment{
 				+ "\n   registerDate = " + registerDate + ", purchaseDate = " + purchaseDate 
 				+ ", endDate = " + endDate +  ", saleDate = " + saleDate+", "
 				+ "\n   rateOfInterest = " + rateOfInterest + " "+ rateOfInterestPeriod 
-				
+				+ "\n   Hold Period: " + PreFixedIncome.super.getHoldPeriod()
 				+ "]";
 	}
 	

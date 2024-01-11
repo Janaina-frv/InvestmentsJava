@@ -28,7 +28,7 @@ public abstract class AbstractInvestment implements Investment{
 		return initialValue;
 	}
 	public Period getHoldPeriod() {
-		return null;//Period LocalDate and Local Time and purchaseDate
+		return Period.between(purchaseDate, LocalDate.now());//Period LocalDate and Local Time and purchaseDate
 	}
 	public LocalDate getSaleDate() {
 		return saleDate;
