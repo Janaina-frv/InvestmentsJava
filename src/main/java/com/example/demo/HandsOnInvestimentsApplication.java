@@ -1,7 +1,9 @@
 package com.example.demo;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Month;
+
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,9 +26,10 @@ public class HandsOnInvestimentsApplication {
 		
 		PosFixedIncome posFixedIncome = new PosFixedIncome(new FinanceManager("Tesouro Direto",0.1,"a.a."),
 				"LTF 2025", 
-				LocalDate.now() , LocalDate.now().plusDays(1), LocalDate.now().plusDays(1).plusYears(1),
-				900.00, "SELIC", "a.d.");
+				LocalDate.of(2023, Month.JANUARY, 1) , LocalDate.of(2023, Month.JANUARY, 2), LocalDate.of(2029, Month.JANUARY, 1),
+				1000.00, "SELIC", "a.m.");
 		System.out.println(posFixedIncome.toString());
+		System.out.println("Currente Value : "+ NumberFormat.getCurrencyInstance().format(posFixedIncome.getCurrentValue()));
 		
 		Stock stock = new Stock(new FinanceManager("XP Investimentos",0.2,"per sale"),
 				"Ações petrobras",  500.00);

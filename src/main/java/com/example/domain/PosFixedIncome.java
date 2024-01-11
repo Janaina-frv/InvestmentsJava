@@ -1,6 +1,7 @@
 package com.example.domain;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 import com.example.domain.Investment.AbstractFixedIncomeInvestment;
 
@@ -41,19 +42,29 @@ public class PosFixedIncome extends AbstractFixedIncomeInvestment{
 	@Override
 	public double getRateOfInterest() {
 		// TODO Auto-generated method stub
-		ExternalResourcesEmulater externalResourcesEmulater = ExternalResourcesEmulater.getInstance();
-		return externalResourcesEmulater.getRateOfInterest(month);
+		return 0;
 	}
 
 	@Override
 	public double getCurrentValue() {
 		// TODO Auto-generated method stub
-		return 0; //calculate with juros compostos, Map
+		ExternalResourcesEmulater externalResourcesEmulater = ExternalResourcesEmulater.getInstance();
+		Integer firstMonth = purchaseDate.getMonthValue();
+		long months = Period.between(purchaseDate, LocalDate.now()).toTotalMonths();
+		double amount = initialValue;
+		
+		for (int i=firstMonth; i < (firstMonth + months); i++) {
+			double rateOfInterestOfMonth = externalResourcesEmulater.getRateOfInterest(i);
+			amount = amount * (1 + rateOfInterestOfMonth);
+		}
+		
+		return amount; //calculate with compound interest = juros compostos, Map
 	}
 
 	@Override
 	public double getProfabilityValue() {
 		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 

@@ -11,9 +11,19 @@ public final class ExternalResourcesEmulater {
 	
 	private ExternalResourcesEmulater () {
 		mapRateofInterest = new HashMap<>();
-		mapRateofInterest.put( 1 , 1.08 );
-		mapRateofInterest.put( 2 , 1.22 );
-		mapRateofInterest.put( 3 , 1.32 );
+		mapRateofInterest.put( 1 , 0.10 );
+		mapRateofInterest.put( 2 , 0.10 );
+		mapRateofInterest.put( 3 , 0.10 );
+		mapRateofInterest.put( 4 , 0.10 );
+		mapRateofInterest.put( 5 , 0.10 );
+		mapRateofInterest.put( 6 , 0.10 );
+		mapRateofInterest.put( 7 , 0.10 );
+		mapRateofInterest.put( 8 , 0.10 );
+		mapRateofInterest.put( 9 , 0.10 );
+		mapRateofInterest.put( 10 , 0.10 );
+		mapRateofInterest.put( 11 , 0.10 );
+		mapRateofInterest.put( 12 , 0.10 );
+		
 	}
 	
 	public static ExternalResourcesEmulater getInstance() {
