@@ -20,6 +20,11 @@ public class Stock extends AbstractInvestment{
 	};
 	
 	@Override
+	public void anything() {
+		System.out.println("System out in Stock!");
+	}
+	
+	@Override
 	public String toString() {
 		return "\n" + financeManager.toString()
 				+"\nStock "
