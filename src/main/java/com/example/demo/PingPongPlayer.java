@@ -14,7 +14,6 @@ public class PingPongPlayer implements Runnable {
 		LocalTime startTime = LocalTime.now();
 		
 		while (Duration.between(startTime, LocalTime.now()).getSeconds() <= 60) {
-			
 			try {
 				Thread.sleep(5000);
 			} catch (InterruptedException e) {
