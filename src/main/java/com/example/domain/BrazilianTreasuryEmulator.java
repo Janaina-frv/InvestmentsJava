@@ -1,13 +1,12 @@
 package com.example.domain;
 
-import com.example.demo.PingPongTable;
 import com.example.domain.Investment.Investment;
 
 public abstract interface BrazilianTreasuryEmulator {
 
-	abstract void register (Investment investment);///
+	public abstract void register (Investment investment);///
+	void sale ();
 	abstract void process (); // FIFO
-	abstract void sale (Investment investment);
 	
 	public static void investmentSimulator (double initialValue, int months, double rateOfInterest) {
 		double finalValue = 0;
@@ -18,8 +17,7 @@ public abstract interface BrazilianTreasuryEmulator {
 		System.out.println("   Initial Valuel: "+ initialValue);
 		System.out.println("   Months: "+ months);
 		System.out.println("   Rate of Interest: "+ rateOfInterest + " per month");
-		System.out.println("   Final Valuel: "+ finalValue);
-	}; 
-	
+		System.out.println("   Final Value: "+ finalValue);
+	} 
 	
 }

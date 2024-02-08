@@ -11,7 +11,7 @@ public class PosFixedIncome extends AbstractFixedIncomeInvestment{
 	public PosFixedIncome( 
 			FinanceManager financeManager,
 			String productName, 
-			LocalDate registerDate, 
+			//LocalDate registerDate, 
 			LocalDate purchaseDate,
 			LocalDate endDate,
 			double initialValue,
@@ -19,7 +19,7 @@ public class PosFixedIncome extends AbstractFixedIncomeInvestment{
 			String rateOfInterestPeriod
 			) {
 		this.productName = productName;
-		this.registerDate = registerDate;
+		//this.registerDate = registerDate;
 		this.purchaseDate = purchaseDate;
 		this.endDate = endDate;
 		this.initialValue = initialValue;
@@ -71,6 +71,8 @@ public class PosFixedIncome extends AbstractFixedIncomeInvestment{
 		
 		return 0;
 	}
+	
+	
 
 
 

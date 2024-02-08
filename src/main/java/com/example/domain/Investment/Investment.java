@@ -10,5 +10,7 @@ public interface Investment {
 	public Period getHoldPeriod();
 	public String getProductName();
 	public double getProfabilityValue();
+	void setRegisterDate(LocalDate registerDate);
+	void setPurchaseDate(LocalDate purchaseDate);
 	
 }

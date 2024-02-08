@@ -24,6 +24,10 @@ public abstract class AbstractInvestment implements Investment{
 	public LocalDate getPurchaseDate() {
 		return purchaseDate;
 	}
+	
+	public void setPurchaseDate(LocalDate purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
 	public double getInitialValue() {
 		return initialValue;
 	}
