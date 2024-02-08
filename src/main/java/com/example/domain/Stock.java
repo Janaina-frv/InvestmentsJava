@@ -20,18 +20,13 @@ public class Stock extends AbstractInvestment{
 	};
 	
 	@Override
-	public void anything() {
-		System.out.println("System out in Stock!");
-	}
-	
-	@Override
 	public String toString() {
 		return "\n" + financeManager.toString()
 				+"\nStock "
 				+ "\n   productName = " + productName 
 				+ ", \n   initialValue = " + initialValue 
 				+ "\n   registerDate = " + registerDate + ", saleDate = " + saleDate+", "
-				+ "\n   Hold Period: " + Stock.super.getHoldPeriod()
+				+ "\n   Hold Period: " + Stock.super.getHoldPeriod().toTotalMonths()+ " months"
 				+ "]";
 	}
 	

@@ -11,10 +11,4 @@ public interface Investment {
 	public String getProductName();
 	public double getProfabilityValue();
 	
-	public default void anything() {
-		System.out.println("System out!");
-	}
-	
-	
-	
 }

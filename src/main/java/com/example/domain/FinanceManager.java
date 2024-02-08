@@ -6,8 +6,6 @@ public class FinanceManager {
 	public double taxFinanceManager;
 	public String taxFinanceManagerPeriod;
 	
-	
-	
 	public FinanceManager(String nameFinanceManager, double taxFinanceManager, String taxFinanceManagerPeriod) {
 		super();
 		this.nameFinanceManager = nameFinanceManager;
@@ -15,16 +13,12 @@ public class FinanceManager {
 		this.taxFinanceManagerPeriod = taxFinanceManagerPeriod;
 	}
 	
-	
-	
 	@Override
 	public String toString() {
 		return "FinanceManager "
 				+ "\n   [nameFinanceManager = " + nameFinanceManager + 
 				", \n   taxFinanceManager = " + taxFinanceManager+" "+ taxFinanceManagerPeriod + "]";
 	}
-
-
 
 	public String getNameFinanceManager() {
 		return nameFinanceManager;
@@ -36,6 +30,4 @@ public class FinanceManager {
 		return taxFinanceManagerPeriod;
 	}
 	
-	
-
 }

@@ -1,5 +1,6 @@
 package com.example.domain;
 
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -36,6 +37,8 @@ public class PosFixedIncome extends AbstractFixedIncomeInvestment{
 				+ "\n   registerDate = " + registerDate + ", purchaseDate = " + purchaseDate 
 				+ ", endDate = " + endDate +  ", saleDate = " + saleDate+", "
 				+ "\n   rateOfInterest = " + nameRateOfInterest + " "+ rateOfInterestPeriod 
+				+ "\n   Hold Period: " + PosFixedIncome.super.getHoldPeriod().toTotalMonths()+ " months"
+				+ "\n   Currente Value : "+ NumberFormat.getCurrencyInstance().format(getCurrentValue())
 				+ "]";
 	}
 	
@@ -47,18 +50,19 @@ public class PosFixedIncome extends AbstractFixedIncomeInvestment{
 
 	@Override
 	public double getCurrentValue() {
-		// TODO Auto-generated method stub
 		ExternalResourcesEmulater externalResourcesEmulater = ExternalResourcesEmulater.getInstance();
 		Integer firstMonth = purchaseDate.getMonthValue();
 		long months = Period.between(purchaseDate, LocalDate.now()).toTotalMonths();
 		double amount = initialValue;
 		
 		for (int i=firstMonth; i < (firstMonth + months); i++) {
-			double rateOfInterestOfMonth = externalResourcesEmulater.getRateOfInterest(i);
+			int monthOfInterest = 0;
+			if(i>=13) {monthOfInterest = i%12;} else {monthOfInterest = i;};
+			double rateOfInterestOfMonth = externalResourcesEmulater.getRateOfInterest(monthOfInterest);
 			amount = amount * (1 + rateOfInterestOfMonth);
 		}
 		
-		return amount; //calculate with compound interest = juros compostos, Map
+		return amount; 
 	}
 
 	@Override
