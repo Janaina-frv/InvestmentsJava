@@ -56,15 +56,14 @@ public class BrazilianTreasureImplementation implements BrazilianTreasuryEmulato
 				
 				if (investment == null) {
 					System.out.println("\nAll investment processed!! Queue is empty!!");
+					System.out.println("Size of Queue: "+investmentsBrazilianTreasury.size());
 				} else {
-					System.out.println("\nInvestment was Processed!!"+investment);
-					
-					
+					System.out.println("\nProcessing: "+investment.getProductName());
+					System.out.println("Size of Queue: "+investmentsBrazilianTreasury.size());	
 				}
 			}
 		}
 	}
-	
 }
 
 
