@@ -1,6 +1,7 @@
 package com.example.domain;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Month;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -14,9 +15,7 @@ public class BrazilianTreasureImplementation implements BrazilianTreasuryEmulato
 	public BrazilianTreasureImplementation() {
 		super();
 		this.investmentsBrazilianTreasury = new LinkedList<Investment>();
-		process();
 	}
-
 
 	@Override
 	public void register (Investment investment) {
@@ -31,18 +30,18 @@ public class BrazilianTreasureImplementation implements BrazilianTreasuryEmulato
 	
 	@Override
 	public void process () {
-		InvestmentProcessor investmentProcessor = new InvestmentProcessor();
-		Thread thread1 = new Thread(investmentProcessor);
-		thread1.start();
+		Investment investment = investmentsBrazilianTreasury.poll();
+		investment.setRegisterDate(LocalDate.now());
+		System.out.println("\nProcessing: "+investment.getProductName());
 	}; 
 	
-	
-	//INNER CLASS
-	private class InvestmentProcessor implements Runnable{
+	public class InvestmentProcessor extends Thread{
+		int count;
+		LocalTime time = LocalTime.now();
 		
 		@Override
 		public void run() {
-			while(true) {
+			while(!(LocalTime.now() == time.plusSeconds(20))) {
 				
 				try {
 					Thread.sleep(8000);
@@ -51,21 +50,16 @@ public class BrazilianTreasureImplementation implements BrazilianTreasuryEmulato
 					e.printStackTrace();
 				}
 
-				Investment investment = investmentsBrazilianTreasury.poll();
-				//add purchase date
-				
-				if (investment == null) {
+				if (investmentsBrazilianTreasury == null) {
 					System.out.println("\nAll investment processed!! Queue is empty!!");
 					System.out.println("Size of Queue: "+investmentsBrazilianTreasury.size());
 				} else {
-					System.out.println("\nProcessing: "+investment.getProductName());
+					process ();
 					System.out.println("Size of Queue: "+investmentsBrazilianTreasury.size());	
+					count += 1;
+					System.out.println("Investments processed: "+ count);
 				}
 			}
 		}
 	}
 }
-
-
-
-

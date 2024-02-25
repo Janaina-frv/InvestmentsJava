@@ -18,6 +18,7 @@ public abstract interface BrazilianTreasuryEmulator {
 		System.out.println("   Months: "+ months);
 		System.out.println("   Rate of Interest: "+ rateOfInterest + " per month");
 		System.out.println("   Final Value: "+ finalValue);
-	} 
+	}
+
 	
 }

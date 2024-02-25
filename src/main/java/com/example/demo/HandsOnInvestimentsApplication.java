@@ -3,17 +3,21 @@ package com.example.demo;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.domain.*;
+import com.example.domain.BrazilianTreasureImplementation.InvestmentProcessor;
 import com.example.domain.Fund.EmergencyFund;
 
 @SpringBootApplication
 public class HandsOnInvestimentsApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		
 		SpringApplication.run(HandsOnInvestimentsApplication.class, args);
 		
@@ -39,27 +43,34 @@ public class HandsOnInvestimentsApplication {
 		
 		Stock stock = new Stock(new FinanceManager("XP Investimentos",0.2,"per sale"),
 				"Ações petrobras",  500.00);
-		//	System.out.println(stock.toString());
+			System.out.println(stock.toString());
 	
 		//BrazilianTreasuryEmulator.investmentSimulator(100.0, 10, 0.5);
 		
 		System.out.println("\nTotal Amount of All Investments: " + String.format("%.2f", emergencyFund.getTotalAmount()));
-		
+
 		BrazilianTreasureImplementation brazilianTreasureImplementation = new BrazilianTreasureImplementation();
-		
 		BrazilianTreasureWebSiteEmulator brazilianTreasureWebSiteEmulator = new BrazilianTreasureWebSiteEmulator(brazilianTreasureImplementation);
-		Thread thread2 = new Thread(brazilianTreasureWebSiteEmulator);
-		thread2.start();
+		InvestmentProcessor investmentProcessor = brazilianTreasureImplementation.new InvestmentProcessor();
+		System.out.println("All up!");		
 		
+		ExecutorService executorService = Executors.newCachedThreadPool();
 		
+		executorService.execute(investmentProcessor);
+		executorService.execute(brazilianTreasureWebSiteEmulator);
+		
+		executorService.shutdown();
+		executorService.awaitTermination(1, TimeUnit.MINUTES);
+		System.out.println("Threads shutdown: "+ executorService.isShutdown());
 	}
 	
 
 	//INNER CLASS
-	private static class BrazilianTreasureWebSiteEmulator implements Runnable {
+	private static class BrazilianTreasureWebSiteEmulator extends Thread {
 		
 		private BrazilianTreasureImplementation  brazilianTreasureImplementation;
 		int count;
+		LocalTime time = LocalTime.now();
 			
 		public BrazilianTreasureWebSiteEmulator (BrazilianTreasureImplementation brazilianTreasureImplementation1) {
 			this.brazilianTreasureImplementation = brazilianTreasureImplementation1;
@@ -68,7 +79,7 @@ public class HandsOnInvestimentsApplication {
 			@Override
 			public void run() {
 
-				while(true) {
+				while(!(LocalTime.now() == time.plusSeconds(20))) {
 					try {
 						Thread.sleep(3000);
 					} catch (InterruptedException e) {
@@ -87,7 +98,7 @@ public class HandsOnInvestimentsApplication {
 					count += 1;
 
 					System.out.println("\nAdding: "+ posFixedIncome.getProductName());
-					System.out.println("Count added: "+ count);
+					System.out.println("Investments registed: "+ count);
 
 				}
 			}
