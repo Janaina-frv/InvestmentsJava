@@ -24,7 +24,7 @@ public class BrazilianTreasureImplementation implements BrazilianTreasuryEmulato
 		super();
 		this.investmentsBrazilianTreasury = new LinkedBlockingQueue<Investment>();
 		count = new AtomicInteger();
-		executorService = Executors.newCachedThreadPool();
+		executorService = Executors.newFixedThreadPool(3);
 	}
 
 	@Override
