@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.emulators;
 
 import java.util.HashMap;
 import java.util.Map;

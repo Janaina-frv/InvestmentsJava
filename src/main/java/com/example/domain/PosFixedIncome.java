@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 import com.example.domain.Investment.AbstractFixedIncomeInvestment;
+import com.example.emulators.ExternalResourcesEmulater;
 
 public class PosFixedIncome extends AbstractFixedIncomeInvestment{
 

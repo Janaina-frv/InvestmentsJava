@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.example.emulators;
 
 import com.example.domain.Investment.Investment;
 

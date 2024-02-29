@@ -11,8 +11,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.example.domain.*;
-import com.example.domain.BrazilianTreasureImplementation.InvestmentProcessor;
 import com.example.domain.Fund.EmergencyFund;
+import com.example.emulators.BrazilianTreasureImplementation;
+import com.example.emulators.BrazilianTreasureImplementation.InvestmentProcessor;
 
 @SpringBootApplication
 public class HandsOnInvestimentsApplication {
@@ -51,17 +52,13 @@ public class HandsOnInvestimentsApplication {
 
 		BrazilianTreasureImplementation brazilianTreasureImplementation = new BrazilianTreasureImplementation();
 		BrazilianTreasureWebSiteEmulator brazilianTreasureWebSiteEmulator = new BrazilianTreasureWebSiteEmulator(brazilianTreasureImplementation);
-		InvestmentProcessor investmentProcessor = brazilianTreasureImplementation.new InvestmentProcessor();
-		System.out.println("All up!");		
+		System.out.println("All up!");	
 		
-		ExecutorService executorService = Executors.newCachedThreadPool();
-		
-		executorService.execute(investmentProcessor);
+		ExecutorService executorService = Executors.newSingleThreadExecutor(); 
 		executorService.execute(brazilianTreasureWebSiteEmulator);
-		
 		executorService.shutdown();
-		executorService.awaitTermination(1, TimeUnit.MINUTES);
-		System.out.println("Threads shutdown: "+ executorService.isShutdown());
+		executorService.awaitTermination(5, TimeUnit.MINUTES);
+		
 	}
 	
 
@@ -76,32 +73,32 @@ public class HandsOnInvestimentsApplication {
 			this.brazilianTreasureImplementation = brazilianTreasureImplementation1;
 		}
 		
-			@Override
-			public void run() {
+		@Override
+		public void run() {
 
-				while(!(LocalTime.now() == time.plusSeconds(20))) {
-					try {
-						Thread.sleep(3000);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					
-					String hour = LocalTime.now().toString();
-
-					PosFixedIncome posFixedIncome = new PosFixedIncome(new FinanceManager("Tesouro Direto",0.3," per month"),
-							"LTF 2026 in "+hour+" time", 
-							LocalDate.of(2023, Month.FEBRUARY, 2), LocalDate.of(2029, Month.APRIL, 1),
-							2000.00, "SELIC", "a.m.");	
-					
-					brazilianTreasureImplementation.register(posFixedIncome);
-					count += 1;
-
-					System.out.println("\nAdding: "+ posFixedIncome.getProductName());
-					System.out.println("Investments registed: "+ count);
-
+			while(!(LocalTime.now() == time.plusSeconds(20))) {
+				try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
+				
+				String hour = LocalTime.now().toString();
+
+				PosFixedIncome posFixedIncome = new PosFixedIncome(new FinanceManager("Tesouro Direto",0.3," per month"),
+						"LTF 2026 in "+hour+" time", 
+						LocalDate.of(2023, Month.FEBRUARY, 2), LocalDate.of(2029, Month.APRIL, 1),
+						2000.00, "SELIC", "a.m.");	
+				
+				brazilianTreasureImplementation.register(posFixedIncome);
+				count += 1;
+
+				System.out.println("\nAdding: "+ posFixedIncome.getProductName());
+				System.out.println("Investments registed: "+ count);
+
 			}
 		}
+	}
 }
 
