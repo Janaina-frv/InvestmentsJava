@@ -16,9 +16,9 @@ public class TestConnection {
 			
 			//executingMyQuery("drop",con);
 			//executingMyQuery("create",con);
-			//insertingReateOfInterestTable("insert",con, 12 , 0.13);
-			//deletingReateOfInterestTable("delete", con, 12);
-			//updatingReateOfInterestTable("update", con, 11, 0.12);
+			//executingMyQuery("insert",con, 12 , 0.13);
+			//executingMyQuery("delete", con, 12);
+			//executingMyQuery("update", con, 11, 0.12);
 			executingMyQuery("select",con);
 			
 		} catch (SQLException e) {
@@ -35,49 +35,6 @@ public class TestConnection {
 	
 	
 	
-	public static void insertingReateOfInterestTable (String option, Connection con, int month, double rate) {
-		if(option == "insert") {
-			try {
-				PreparedStatement insert = con.prepareStatement("INSERT INTO RateOfInterest Values(?,?)");
-					insert.setInt(1, month);
-					insert.setDouble(2, rate);
-				insert.execute();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-			System.out.println("Nothing to do!!");
-		}
-	}
-	
-	public static void deletingReateOfInterestTable (String option, Connection con, int month) {
-		if(option == "delete") {
-			try {
-				PreparedStatement delete = con.prepareStatement("DELETE FROM RateOfInterest WHERE month = ?");
-					delete.setInt(1, month);
-				delete.execute();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-			System.out.println("Nothing to do!!");
-		}
-	}
-	
-	public static void updatingReateOfInterestTable (String option, Connection con, int month, double rate) {
-		if(option == "update") {
-			try {
-				PreparedStatement update = con.prepareStatement("UPDATE RateOfInterest SET rateOfInterest = ? WHERE month = ?");
-				update.setDouble(1, rate);
-				update.setInt(2, month);
-				update.execute();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		} else {
-			System.out.println("Nothing to do!!");
-		}
-	}
 	
 	public static void executingMyQuery(String option, Connection con) {
 		switch(option){
@@ -110,6 +67,51 @@ public class TestConnection {
 					    System.out.print(result.getString(1)+"     ");
 					    System.out.println(result.getString(2));
 					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				break;
+			default:
+				System.out.println("Nothing to do!!");
+		}
+		
+	}
+	
+	public static void executingMyQuery(String option, Connection con, int month) {
+		switch(option){
+			case "delete":
+				try {
+					PreparedStatement delete = con.prepareStatement("DELETE FROM RateOfInterest WHERE month = ?");
+						delete.setInt(1, month);
+					delete.execute();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				break;
+			default:
+				System.out.println("Nothing to do!!");
+		}
+		
+	}
+	
+	public static void executingMyQuery(String option, Connection con, int month, double rate) {
+		switch(option){
+			case "insert":
+				try {
+					PreparedStatement insert = con.prepareStatement("INSERT INTO RateOfInterest Values(?,?)");
+						insert.setInt(1, month);
+					insert.setDouble(2, rate);
+				insert.execute();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				break;
+			case "update":
+				try {
+					PreparedStatement update = con.prepareStatement("UPDATE RateOfInterest SET rateOfInterest = ? WHERE month = ?");
+						update.setDouble(1, rate);
+						update.setInt(2, month);
+					update.execute();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
