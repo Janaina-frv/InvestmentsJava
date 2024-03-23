@@ -4,6 +4,8 @@ import java.time.Period;
 
 public interface Investment {
 
+	public LocalDate getSaleDate();
+	public LocalDate getRegisterDate();
 	public LocalDate getPurchaseDate();
 	public double getInitialValue();
 	public double getCurrentValue(); //juros compostos - Map

@@ -1,5 +1,9 @@
 package com.example.emulators;
 
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Month;
@@ -13,6 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.example.domain.Investment.Investment;
 import com.example.emulators.BrazilianTreasureImplementation.InvestmentProcessor;
+import com.example.jdbc.ConnectionFactory;
 
 public class BrazilianTreasureImplementation implements BrazilianTreasuryEmulator {
 	
@@ -46,17 +51,12 @@ public class BrazilianTreasureImplementation implements BrazilianTreasuryEmulato
 	}; 
 	
 	public class InvestmentProcessor extends Thread{
+		
+		private Connection con = null;
 	
 		@Override
 		public void run() {
-
-			try {
-				Thread.sleep(8000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
+		
 			Investment investment = investmentsBrazilianTreasury.poll();
 
 			if (investment == null) {
@@ -68,6 +68,26 @@ public class BrazilianTreasureImplementation implements BrazilianTreasuryEmulato
 				System.out.println("Size of Queue: "+investmentsBrazilianTreasury.size());	
 				count.incrementAndGet();
 				System.out.println("Investments processed: "+ count);
+				
+				try {
+					con = ConnectionFactory.getConnection();
+					System.out.println("Connection up!!");
+					PreparedStatement p = con.prepareStatement("INSERT INTO Investment (registerdate, purchasedate, initialvalue, productname) VALUES(?, ?, ?, ?)");
+					p.setDate(1, java.sql.Date.valueOf(investment.getRegisterDate()));
+					p.setDate(2, java.sql.Date.valueOf(investment.getPurchaseDate()));
+					p.setDouble(3, investment.getInitialValue());
+					p.setString(4, investment.getProductName());
+					p.executeUpdate();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						con.close();
+						System.out.println("Connection closed!!");
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	}
